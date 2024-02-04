@@ -1,0 +1,8 @@
+<div class="search-form">
+    <div>
+        <!-- keyup.enter to allow search on enter click and (input) to allow the search while typing -->
+        <input #myInput type="text" placeholder="Search for an artist ..."
+            class="au-input au-input-xl input-search rounded-3xl w-full" (keyup.enter)="doSearch(myInput.value)" 
+            (input)="doSearch(myInput.value)">
+    </div>
+</div>

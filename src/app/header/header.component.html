@@ -1,0 +1,79 @@
+<nav class="bg-transparent">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8 bg-black">
+        <div class="flex h-20 items-center justify-between">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <img class="h-8 w-8" src="../../../../assets/images/logo-white.png" alt="Your Company">
+                </div>
+                <h1 class="text-3xl font-bold tracking-tight text-white">Spotify</h1>
+                <div class="hidden md:block">
+                    <div class="ml-20 flex items-baseline space-x-6">
+                        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                        <a href="/home"
+                            class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium active:font-semibold"
+                            aria-current="page">Home</a>
+                        <a href="/artists/add-new"
+                            class="text-white hover:underline hover:text-gray-200 rounded-md px-3 py-2 text-sm font-medium">Add
+                            Artist</a>
+                        <app-search  #searchComponent></app-search>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-4 flex items-center md:ml-6">
+                    <!-- Log out -->
+                    <div class="relative ml-3">
+                        <div>
+                            <button type="button" (click)="logout"
+                                class="relative flex max-w-xs p-3 items-center rounded-xl bg-white text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                Sign Out </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="-mr-2 flex md:hidden">
+                <!-- Mobile menu button -->
+                <button type="button" (click)="toggleBurgerMenu()"
+                    class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    aria-controls="mobile-menu" aria-expanded="false">
+                    <span class="absolute -inset-0.5"></span>
+                    <span class="sr-only">Open main menu</span>
+                    <!-- Menu open: "hidden", Menu closed: "block" -->
+                    <svg [ngClass]="{'block' : !isOpen, 'hidden': isOpen}" class="h-6 w-6" fill="none"
+                        viewBox="0 0 24 24" stroke-width="1.5" stroke="white" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                    <!-- Menu open: "block", Menu closed: "hidden" -->
+                    <svg [ngClass]="{'hidden' : !isOpen ,'block' : isOpen, }" class="h-6 w-6" fill="none"
+                        viewBox="0 0 24 24" stroke-width="1.5" stroke="white" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile menu, show/hide based on menu state. -->
+    <div [ngClass]="{'md:hidden' : !isOpen, 'transition ease-out duration-100 transform opacity-100 scale-100 bg-black': isOpen, 'transition ease-in duration-75 transform opacity-0 scale-95': !isOpen}"
+        id="mobile-menu">
+        <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+            <a href="#" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
+                aria-current="page">Home</a>
+            <a href="#"
+                class="text-white hover:underline hover:text-gray-200 block rounded-md px-3 py-2 text-base font-medium">Add
+                Artist</a>
+            <app-search #searchComponent></app-search>
+        </div>
+        <div class="border-t border-gray-700 pb-3 pt-4">
+            <div class="flex items-center px-5">
+            </div>
+            <div class="mt-3 space-y-1 px-2">
+                <button type="button" (click)="logout"
+                    class="relative flex max-w-xs p-3 items-center rounded-xl bg-white text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    Sign Out </button>
+            </div>
+        </div>
+    </div>
+</nav>

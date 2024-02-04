@@ -1,0 +1,154 @@
+<app-header></app-header>
+<div class="m-1 p-2 sm:m-12 sm:p-10">
+    <form class="checkout-form center-section" [formGroup]="newArtistForm" (ngSubmit)="onSubmit()">
+
+
+        <div formGroupName="artist" class="column-layout">
+            <!-- <div class="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-6"></div> -->
+            <!-- Artist Details -->
+            <div
+                class="border-b border-gray-900/10 pb-12 shadow-xl m-12 p-10 rounded-xl bg-white-600 border-2 border-slate-600">
+                <div class="pb-12">
+                    <h2 class="text-base font-bold text-2xl leading-7 text-gray-900">Artist Details</h2>
+                    <!-- Profile -->
+                    <div class="col-span-full">
+                        <div class="mt-2 flex items-center gap-x-3">
+                            <svg class="h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <button type="button"
+                                class="rounded-full bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                                <input id="picture" name="file-upload" type="file" class="sr-only">
+                                <span>+</span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    <div class="sm:col-span-3">
+                        <app-form-input label="First Name" placeholderText="First Name" formControlName="firstName"
+                            [control]="getformControlValue('artist', 'firstName')"></app-form-input>
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <app-form-input label="Last Name" placeholderText="Last Name" formControlName="lastName"
+                            [control]="getformControlValue('artist', 'lastName')"></app-form-input>
+                    </div>
+                    <div class="sm:col-span-3">
+                        <app-form-input label="Date of Birth" placeholderText="Date of Birth" formControlName="dob"
+                        [control]="getformControlValue('artist', 'dob')" inputType="date"></app-form-input>
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <app-form-input label="Phone Number" placeholderText="961XXXXXXXX"
+                            formControlName="phoneNumber"
+                            [control]="getformControlValue('artist', 'phoneNumber')"></app-form-input>
+                    </div>
+
+                    <div class="sm:col-span-6">
+                        <app-form-input label="Email" placeholderText="Email" formControlName="email" inputType="email"
+                            [control]="getformControlValue('artist', 'email')"></app-form-input>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Career Details -->
+            <div class="border-b border-gray-900/10 pb-12
+            shadow-xl m-12 p-10 rounded-xl bg-white-600 border-2 border-slate-600">
+                <h2 class="text-base text-2xl font-bold leading-7 text-gray-900 pt-2">Career Details</h2>
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    <div class="sm:col-span-3">
+                        <app-form-input label="Stage Name" placeholderText="Stage Name" formControlName="stageName"
+                            [control]="getformControlValue('artist', 'stageName')"></app-form-input>
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <app-form-input label="Starting Date" placeholderText="Starting Date" formControlName="startingDate"
+                        [control]="getformControlValue('artist', 'startingDate')" inputType="date"></app-form-input>
+
+                    </div>
+
+                    <div class="sm:col-span-6">
+                        <label for="artistBackstory"
+                            class="block text-sm font-medium leading-6 text-gray-900">About</label>
+                        <div class="mt-1">
+                            <textarea id="artistBackstory" name="artistBackstory" rows="5"
+                                formControlName="artistBackstory" placeholder="Artist Backstory"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div formGroupName="albums"
+            class="column-layout border-b border-gray-900/10 pb-12 shadow-xl m-12 p-10 rounded-xl bg-white-600 border-2 border-slate-600">
+            <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 rounded">
+                <div class="sm:col-span-1 border-1 shadow-xl p-5">
+                    <div class="mt-[2em] sm:mt-[7em] flex items-center justify-center">
+                        <button type="button" (click)="addAlbum()">
+                            <span class="text-7xl">+</span>
+                            <br>
+                        <span>Add New Album</span></button>
+                    </div>
+                </div>
+                <div *ngFor="let album of albumsArray.controls; let i = index"  formArrayName="albumsArray">
+                    <div class="sm:col-span-2 rounded">
+                        <div class="border-1 shadow-xl p-5">
+                            <h2 class="text-base text-2xl font-bold leading-7 text-gray-900 pt-2">Album {{ i + 1 }}</h2>
+                           <!-- Album Picture -->
+                            <div>
+                                <div>
+                                    <label for="picture" class="block text-sm font-medium leading-6 text-gray-900">Album
+                                        Photo
+                                    </label>
+                                    <div
+                                        class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                                        <div class="text-center">
+                                            <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24"
+                                                fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd"
+                                                    d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                            <div class="mt-4 flex text-sm leading-6 text-gray-600">
+                                                <label for="picture"
+                                                    class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                                                    <span>Upload a file</span>
+                                                    <input id="picture" name="file-upload" type="file" class="sr-only" formControlName="picture">
+                                                </label>
+                                                <p class="pl-1">or drag and drop</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Album Date -->
+                            <div class="sm:col-span-3">
+                                <app-form-input label="Date" placeholderText="Date" formControlName="date"
+                                inputType="date"></app-form-input>
+                            </div>
+                            <div
+                                class=" mt-2 w-full border-white bg-neutral-700 text-center rounded-md justify-items-center hover:bg-neutral-700 border-2">
+                                <button type="button" (click)="removeAlbum(i)"
+                                    class="px-5 py-2 text-sm font-medium text-white shadow-sm">Remove Album</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+            <button type="submit" [disabled]="this.newArtistForm.valid" class="rounded-md bg-slate px-3 py-2 text-sm font-medium text-white shadow-sm 
+                hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 
+                focus-visible:outline-offset-2 focus-visible:outline-slate-600
+                disabled:bg-slate-600">Submit
+            </button>
+        </div>
+    </form>
+</div>

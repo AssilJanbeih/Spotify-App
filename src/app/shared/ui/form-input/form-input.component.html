@@ -1,0 +1,27 @@
+<label for="{{id}}" class="{{labelClass}}">{{label}}</label>
+<div class="mt-1">
+    <input #input [type]="inputType" name="{{id}}" id="{{id}}" (input)="onChange($any($event.target).value)"
+        autocomplete="complete" [required]="isRequired"
+        [placeholder]="placeholderText"
+        class="form-{{inputType}} {{inputClass}}">
+    <ng-container *ngIf="(controlDir
+         && controlDir.control
+         && !controlDir.control.valid
+         && controlDir.control.touched)">
+        <!-- Email Error -->
+        <ng-container *ngIf="(controlDir?.hasError('email') && ! controlDir?.hasError('required'))">
+            <p class=" text-rose-600 text-sm">Please enter a valid {{label}}</p>
+        </ng-container>
+
+        <!-- Length Error or whitespace -->
+        <ng-container *ngIf="((controlDir.control.errors?.['min']
+    || controlDir.control.errors?.['notOnlyWhitespace'])
+    && !controlDir.control.errors?.['required'])">
+            <p class="text-rose-600 text-sm">Please enter a valid {{label}}</p>
+        </ng-container>
+        <!-- Required Field Error -->
+        <ng-container *ngIf="(controlDir.control.errors?.['required'])">
+            <p class="text-rose-600 text-sm">{{label}} is <strong>required</strong></p>
+        </ng-container>
+    </ng-container>
+</div>

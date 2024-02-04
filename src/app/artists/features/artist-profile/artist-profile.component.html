@@ -1,0 +1,73 @@
+<app-header></app-header>
+<div *ngIf="!artist">
+    <app-image-with-button [imagePath]="'assets/images/music.png'" link="/"
+        text="Sorry! Couldn't find this artist."></app-image-with-button>
+</div>
+<div class="bg-black-2 p-5" *ngIf="artist">
+    <div class="mt-10 grid grid-cols-1 sm:grid-cols-5">
+        <div class="sm:col-span-1 items-center sm:m-1">
+            <img *ngIf="artist.images[1].url" class="rounded-full" [src]="artist.images[1]?.url" [alt]="artist.name">
+            <!-- <div *ngIf="!artist.images[1].url"  class="rounded-full bg-black"></div> -->
+            <!-- <div class="p-5 m-2">
+                <app-popularity-stars [popularity]="artist.popularity">
+                </app-popularity-stars>
+            </div> -->
+        </div>
+
+        <div class="sm:col-span-4 flex grid grid-cols-1">
+            <ul role="list" class="">
+                <!-- Name, Genre, Popularity -->
+                <li class="flex justify-between gap-x-6 py-5">
+                    <!-- Name and genre -->
+                    <div class="flex min-w-0 gap-x-4">
+                        <div class="min-w-0 flex-auto">
+                            <!-- Name and genre -->
+                            <div class="flex min-w-0 gap-x-4">
+                                <!-- Artist Name -->
+                                <div class="min-w-0 flex-auto">
+                                    <h1 class="font-medium text-white text-7xl">{{ artist.name }}</h1>
+                                </div>
+                                <!-- Genre -->
+                                <div class="sm:block hidden sm:flex sm:flex-col sm:inline-flex">
+                                    <div *ngFor="let genre of artist.genres">
+                                        <h2 class="text-white rounded-3xl bg-neutral-700 w-fit px-4 py-2 m-2">{{genre}}
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Popularity -->
+                    <div class="hidden shrink-0 sm:flex flex-col items-start">
+                        <app-popularity-stars [popularity]="artist.popularity">
+                        </app-popularity-stars>
+                    </div>
+                </li>
+                <!-- Genre on sm -->
+                <li>
+                    <div class="sm:hidden block shrink-0 inline-grid grid-cols-3 gap-1 flex flex-col">
+                        <div *ngFor="let genre of artist.genres">
+                            <h2 class="text-white rounded-3xl bg-neutral-700 w-fit px-4 py-2 m-2 max-w-25">{{genre}}
+                            </h2>
+                        </div>
+                    </div>
+                </li>
+                <!-- Top 5 tracks -->
+                <li>
+                    <div class="sm:col-span-4">
+                        <h1 class="text-white font-bold text-3xl mt-5 px-2 sm:px-10">Top 5 Tracks</h1>
+                        <app-track-row [tracks]="topTrack"></app-track-row>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- All Artist Albums -->
+    <h1 class="text-white font-bold text-3xl mt-5 px-5">Albums</h1>
+    <div
+        class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 min-h-[400px]">
+        <app-album-card *ngFor="let album of albums" [album]="album">
+        </app-album-card>
+    </div>
+</div>

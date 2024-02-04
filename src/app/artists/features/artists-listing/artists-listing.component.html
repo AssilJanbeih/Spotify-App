@@ -1,0 +1,19 @@
+<app-header></app-header>
+<div *ngIf="noResultFound">
+    <app-image-with-button [imagePath]="'assets/images/music.png'" link="/artists/add-new"
+        text="{{ isSearching? 'Sorry! Couldn\'t find this artist.' : 'Search Above for your Favorite Artist or '}}"
+        [buttonText]="'Add New Artist'"></app-image-with-button>
+</div>
+<div *ngIf="!noResultFound" class="bg-black-2">
+    <div class=""
+        [ngClass]="moreArtists ? 'show' : 'search-section__artists-container--hide'" *ngIf="artistsList.length > 0">
+        <div class="p-5">
+            <h2 class="text-white rounded-3xl bg-neutral-700 w-fit px-4 py-2">Artists Result</h2>
+        </div>
+        <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+            <app-artist-card [artist]="artist" *ngFor="let artist of artistsList"></app-artist-card>
+        </div>
+        <button class="" (click)="seeMoreArtists()"> View More</button>
+    </div>
+
+</div>

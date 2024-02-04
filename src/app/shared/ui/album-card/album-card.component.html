@@ -1,0 +1,25 @@
+<div class="sm:col-span-4" *ngIf="album">
+    <div class="border-slate pb-12 shadow-xl shadow-current m-12 p-10 rounded-xl bg-neutral-700 border-2">
+        <div class="items-center m-1 sm:m-1">
+            <img *ngIf="album.images[1].url" class="rounded-full" [src]="album.images[1].url"
+                [alt]="album.name">
+            <!-- <div *ngIf="!artist.images[1].url"  class="rounded-full bg-black"></div> -->
+        </div>
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-4">
+            <div class="sm:col-span-4">
+                <h4 class="font-medium text-white text-xl">{{ album.name }}</h4>
+            </div>
+            <!-- <div class="sm:col-span-2 flex justify-end">
+                <span class="text-white font-light">{{ album.release_date | date }}</span>
+            </div> -->
+        </div>
+        <div class="mt-5 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
+            <div class="col-span-1 sm:col-span-2">
+                <span class="text-white font-light">{{ album.total_tracks }} Tracks</span>
+            </div>
+            <div class="col-span-1 sm:col-span-2 flex justify-end">
+                <span class="text-white font-light">{{ album.release_date | date }}</span>
+            </div>
+        </div>
+    </div>
+</div>
