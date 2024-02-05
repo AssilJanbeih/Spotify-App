@@ -1,0 +1,21 @@
+<div *ngIf="isOpen" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 modal border-2 border-gray-900 p-5 shadow-sm">
+  <div [formGroup]="modalForm">
+    <div formGroupName="songs">
+      <div formArrayName="songsArray">
+        <ul role="list">
+          <li *ngFor="let song of getSongsArray().controls; let j = index" [formGroupName]="j">
+            <app-form-input label="Name" placeholderText="Song Name" formControlName="name"></app-form-input>
+            <app-form-input label="Duration" placeholderText="Duration in ms" formControlName="duration"></app-form-input>
+            <div class="mt-2 w-full border-white bg-neutral-700 text-center rounded-md justify-items-center hover:bg-neutral-700 border-2">
+              <button type="button" (click)="removeSong(j)" class="px-5 py-2 text-sm font-medium text-white shadow-sm">
+                Remove Song
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <button (click)="addSong()">Add Song</button>
+</div>
+

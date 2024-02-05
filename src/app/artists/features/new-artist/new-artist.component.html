@@ -19,7 +19,7 @@
                                     d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
                                     clip-rule="evenodd" />
                             </svg>
-                            <app-form-input label="" placeholderText="Profile Picture Link"
+                            <app-form-input label="Profile Image" placeholderText="Profile Picture Link"
                                 formControlName="profilePicture"
                                 [control]="getformControlValue('artist', 'profilePicture')"></app-form-input>
                         </div>
@@ -127,20 +127,36 @@
                                     </div>
                                 </div>
                             </div>
+                            <img *ngIf="getformControlValue('albumsArray', 'picture')?.value"
+                                [src]="getformControlValue('albumsArray', 'picture')?.value" alt="Selected Album Photo"
+                                class="mt-4 rounded-md border-white bg-neutral-700 text-center"
+                                style="max-width: 100%;">
                             <!-- Album Date -->
                             <div>
                                 <app-form-input label="Date" placeholderText="Date" formControlName="date"
                                     inputType="date"></app-form-input>
                             </div>
-                            <div
+                            <!-- Songs -->
+                            <!-- <div
                                 class=" mt-2 w-full border-white bg-neutral-700 text-center rounded-md justify-items-center hover:bg-neutral-700 border-2">
-                                <button type="button" (click)="addSong()"
-                                    class="px-5 py-2 text-sm font-medium text-white shadow-sm">Add Song</button>
+                                <button class="px-5 py-2 text-sm font-medium text-white shadow-sm"
+                                    (click)="openSongModal(i)">Add Songs</button>
                             </div>
+                            <app-song-modal [modalForm]="getAlbumSongsFormGroup(i)" [isOpen]="isSongModalOpen[i]"
+                                (closeModal)="closeSongModal()" (saveSongs)="saveSongs($event)" [currentAlbumIndex]="i">
+                            </app-song-modal> -->
                             <div formGroupName="songs">
+                                <app-form-input label="Name" placeholderText="Song Name"
+                                    formControlName="name"></app-form-input>
+                                <app-form-input label="Duration" placeholderText="Duration in ms"
+                                    formControlName="duration"></app-form-input>
+                            </div>
+
+                            <!-- <app-song-modal [isOpen]="isSongFormOpen">
+                                <div formGroupName="songs">
                                     <div formArrayName="songsArray">
                                         <ul role="list">
-                                            <li *ngFor="let song of songsArray.controls; let j = index"
+                                            <li *ngFor="let song of songsArray?.controls; let j = index"
                                                 [formGroupName]="j"> 
                                             <app-form-input label="Name" placeholderText="Song Name"
                                                     formControlName="name"></app-form-input>
@@ -148,7 +164,7 @@
                                                     formControlName="duration"></app-form-input>
                                                 <div
                                                     class=" mt-2 w-full border-white bg-neutral-700 text-center rounded-md justify-items-center hover:bg-neutral-700 border-2">
-                                                    <button type="button" (click)="removeSong(i)"
+                                                    <button type="button" (click)="removeSong(i,j)"
                                                         class="px-5 py-2 text-sm font-medium text-white shadow-sm">Remove
                                                         Song</button>
                                                 </div>
@@ -156,6 +172,9 @@
                                         </ul>
                                     </div>
                                 </div>
+                                <button (click)="addSongToAlbum(i)">Save</button>
+                              </app-song-modal>
+                             -->
                             <div
                                 class=" mt-2 w-full border-white bg-neutral-700 text-center rounded-md justify-items-center hover:bg-neutral-700 border-2">
                                 <button type="button" (click)="removeAlbum(i)"
