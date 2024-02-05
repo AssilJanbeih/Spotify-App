@@ -38,7 +38,7 @@ export class NewArtistComponent {
         dob: [null, [Validators.required, CustomValidators.age25Validator()]], //(min age: 25)
         email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z09.-]+\\.[a-z]{2,4}$')]],
         phoneNumber: ['', [Validators.required, Validators.pattern('^961[0-9]{8}$')]],  //(use regex expression to validate the Lebanese phone numbers)
-        profilePicture: [''],
+        profilePicture: ['', [Validators.required]],
         stageName: [''],
         artistBackstory: [''],
         startingDate: [null],
@@ -58,12 +58,9 @@ export class NewArtistComponent {
       picture: [''],
       date: [null],
       //array of songs
-      songs: this.formBuilder.array([
-        this.formBuilder.group({
-          name: [''],
-          duration: [''],
-        }),
-      ]),  // You can add custom validators or use Validators.required based on your needs
+      songs: this.formBuilder.group({
+        songsArray: this.formBuilder.array([this.newSongFormGroup()]),
+      }),
     });
   }
   get albumsArray(): FormArray {
@@ -76,6 +73,26 @@ export class NewArtistComponent {
 
   removeAlbum(index: number): void {
     this.albumsArray.removeAt(index);
+  }
+
+  newSongFormGroup(): FormGroup {
+    return this.formBuilder.group({
+      name: [''],
+      duration: [''],
+    });
+  }
+
+  get songsArray(): FormArray {
+    return this.newArtistForm.get('albums.albumsArray.songs.songsArray') as FormArray;
+  }
+
+  addSong(): void {
+    if (this.songsArray) {
+      this.songsArray.push(this.newSongFormGroup());}
+  }
+
+  removeSong(index: number): void {
+    this.songsArray.removeAt(index);
   }
   onSubmit() {
     console.log(this.newArtistForm.value);
