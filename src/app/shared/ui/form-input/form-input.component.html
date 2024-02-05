@@ -1,23 +1,27 @@
 <label for="{{id}}" class="{{labelClass}}">{{label}}</label>
 <div class="mt-1">
     <input #input [type]="inputType" name="{{id}}" id="{{id}}" (input)="onChange($any($event.target).value)"
-        autocomplete="complete" [required]="isRequired"
-        [placeholder]="placeholderText"
-        class="form-{{inputType}} {{inputClass}}">
+        autocomplete="complete" [required]="isRequired" [placeholder]="placeholderText" (blur)="onTouched()"
+        class="form-{{inputType}} {{inputClass}}" />
     <ng-container *ngIf="(controlDir
          && controlDir.control
          && !controlDir.control.valid
-         && controlDir.control.touched)">
+         && (controlDir.control.touched || controlDir.control.dirty))">
         <!-- Email Error -->
-        <ng-container *ngIf="(controlDir?.hasError('email') && ! controlDir?.hasError('required'))">
-            <p class=" text-rose-600 text-sm">Please enter a valid {{label}}</p>
-        </ng-container>
-
-        <!-- Length Error or whitespace -->
-        <ng-container *ngIf="((controlDir.control.errors?.['min']
-    || controlDir.control.errors?.['notOnlyWhitespace'])
-    && !controlDir.control.errors?.['required'])">
+        <ng-container
+            *ngIf="(controlDir.hasError('pattern') && controlDir.control.dirty && ! controlDir.hasError('required'))">
             <p class="text-rose-600 text-sm">Please enter a valid {{label}}</p>
+        </ng-container>
+        <!-- Length Error or whitespace -->
+        <ng-container *ngIf="((controlDir.control.hasError('minlength') && controlDir.control.dirty)
+        || (controlDir.control.hasError('notOnlyWhitespace') && controlDir.control.dirty)
+    && !controlDir.control.errors?.['required'])">
+            <p class="text-rose-600 text-sm">Please enter a valid {{label}}, of minimum 3 characters</p>
+        </ng-container>
+        <!-- Date Age -->
+        <ng-container *ngIf="(controlDir.control.hasError('ageBelow25') && controlDir.control.dirty
+    && !controlDir.control.errors?.['required'])">
+            <p class="text-rose-600 text-sm">Age should be <strong>above 25</strong></p>
         </ng-container>
         <!-- Required Field Error -->
         <ng-container *ngIf="(controlDir.control.errors?.['required'])">

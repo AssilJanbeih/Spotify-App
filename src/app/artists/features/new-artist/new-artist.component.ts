@@ -35,9 +35,9 @@ export class NewArtistComponent {
       artist: this.formBuilder.group({
         firstName: ['', [Validators.required, Validators.minLength(3), CustomValidators.noOnlyWhiteSpace]],
         lastName: ['', [Validators.required, Validators.minLength(3), CustomValidators.noOnlyWhiteSpace]],
-        dob: [null, [Validators.required, CustomValidators.age25Validator]], //(min age: 25)
+        dob: [null, [Validators.required, CustomValidators.age25Validator()]], //(min age: 25)
         email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z09.-]+\\.[a-z]{2,4}$')]],
-        phoneNumber: ['', [Validators.required, Validators.pattern('^961\d{8}$')]],  //(use regex expression to validate the Lebanese phone numbers)
+        phoneNumber: ['', [Validators.required, Validators.pattern('^961[0-9]{8}$')]],  //(use regex expression to validate the Lebanese phone numbers)
         profilePicture: [''],
         stageName: [''],
         artistBackstory: [''],
@@ -47,7 +47,8 @@ export class NewArtistComponent {
       albums: this.formBuilder.group({
         albumsArray: this.formBuilder.array([this.newAlbumFormGroup()]),
       }),
-    })
+
+    });
   }
 
   getformControlValue(group: string, name: string) { return this.newArtistForm.get(`${group}.${name}`); }

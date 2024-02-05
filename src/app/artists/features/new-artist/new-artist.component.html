@@ -38,12 +38,11 @@
                     </div>
                     <div class="sm:col-span-3">
                         <app-form-input label="Date of Birth" placeholderText="Date of Birth" formControlName="dob"
-                        [control]="getformControlValue('artist', 'dob')" inputType="date"></app-form-input>
+                            [control]="getformControlValue('artist', 'dob')" inputType="date"></app-form-input>
                     </div>
 
                     <div class="sm:col-span-3">
-                        <app-form-input label="Phone Number" placeholderText="961XXXXXXXX"
-                            formControlName="phoneNumber"
+                        <app-form-input label="Phone Number" placeholderText="961XXXXXXXX" formControlName="phoneNumber"
                             [control]="getformControlValue('artist', 'phoneNumber')"></app-form-input>
                     </div>
 
@@ -65,8 +64,9 @@
                     </div>
 
                     <div class="sm:col-span-3">
-                        <app-form-input label="Starting Date" placeholderText="Starting Date" formControlName="startingDate"
-                        [control]="getformControlValue('artist', 'startingDate')" inputType="date"></app-form-input>
+                        <app-form-input label="Starting Date" placeholderText="Starting Date"
+                            formControlName="startingDate" [control]="getformControlValue('artist', 'startingDate')"
+                            inputType="date"></app-form-input>
 
                     </div>
 
@@ -92,54 +92,58 @@
                         <button type="button" (click)="addAlbum()">
                             <span class="text-7xl">+</span>
                             <br>
-                        <span>Add New Album</span></button>
+                            <span>Add New Album</span></button>
                     </div>
                 </div>
-                <div *ngFor="let album of albumsArray.controls; let i = index"  formArrayName="albumsArray">
-                    <div class="sm:col-span-2 rounded">
-                        <div class="border-1 shadow-xl p-5">
-                            <h2 class="text-base text-2xl font-bold leading-7 text-gray-900 pt-2">Album {{ i + 1 }}</h2>
-                           <!-- Album Picture -->
-                            <div>
+                <div formArrayName="albumsArray">
+                    <div *ngFor="let album of albumsArray.controls; let i = index" [formGroupName]="i">
+                        <div class="sm:col-span-2 rounded">
+                            <div class="border-1 shadow-xl p-5">
+                                <h2 class="text-base text-2xl font-bold leading-7 text-gray-900 pt-2">Album {{ i + 1 }}
+                                </h2>
+                                <!-- Album Picture -->
                                 <div>
-                                    <label for="picture" class="block text-sm font-medium leading-6 text-gray-900">Album
-                                        Photo
-                                    </label>
-                                    <div
-                                        class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                                        <div class="text-center">
-                                            <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24"
-                                                fill="currentColor" aria-hidden="true">
-                                                <path fill-rule="evenodd"
-                                                    d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            <div class="mt-4 flex text-sm leading-6 text-gray-600">
-                                                <label for="picture"
-                                                    class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
-                                                    <span>Upload a file</span>
-                                                    <input id="picture" name="file-upload" type="file" class="sr-only" formControlName="picture">
-                                                </label>
-                                                <p class="pl-1">or drag and drop</p>
+                                    <div>
+                                        <label for="picture"
+                                            class="block text-sm font-medium leading-6 text-gray-900">Album
+                                            Photo
+                                        </label>
+                                        <div
+                                            class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                                            <div class="text-center">
+                                                <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24"
+                                                    fill="currentColor" aria-hidden="true">
+                                                    <path fill-rule="evenodd"
+                                                        d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                                <div class="mt-4 flex text-sm leading-6 text-gray-600">
+                                                    <label for="picture"
+                                                        class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                                                        <span>Upload a file</span>
+                                                        <input id="picture" name="file-upload" type="file"
+                                                            class="sr-only" formControlName="picture">
+                                                    </label>
+                                                    <p class="pl-1">or drag and drop</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Album Date -->
-                            <div class="sm:col-span-3">
-                                <app-form-input label="Date" placeholderText="Date" formControlName="date"
-                                inputType="date"></app-form-input>
-                            </div>
-                            <div
-                                class=" mt-2 w-full border-white bg-neutral-700 text-center rounded-md justify-items-center hover:bg-neutral-700 border-2">
-                                <button type="button" (click)="removeAlbum(i)"
-                                    class="px-5 py-2 text-sm font-medium text-white shadow-sm">Remove Album</button>
+                                <!-- Album Date -->
+                                <div class="sm:col-span-3">
+                                    <app-form-input label="Date" placeholderText="Date" formControlName="date"
+                                        inputType="date"></app-form-input>
+                                </div>
+                                <div
+                                    class=" mt-2 w-full border-white bg-neutral-700 text-center rounded-md justify-items-center hover:bg-neutral-700 border-2">
+                                    <button type="button" (click)="removeAlbum(i)"
+                                        class="px-5 py-2 text-sm font-medium text-white shadow-sm">Remove Album</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
         </div>
