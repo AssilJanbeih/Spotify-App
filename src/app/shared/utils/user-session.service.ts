@@ -17,9 +17,8 @@ export class UserSessionService {
   public isAuthentic() {
     if (this.accessToken) {
       // Access Token available, save it to local storage to use it in our search
-
       localStorage.setItem('access_token', this.accessToken);
-      this.router.navigate([HOME_ROUTE]);
+      // this.router.navigate([HOME_ROUTE]);
     } else {
       //Access token not granted
       console.error('Authentication failed');
@@ -35,6 +34,7 @@ export class UserSessionService {
           console.log(accessToken);
           this.accessToken = accessToken;
           this.isAuthentic();
+          this.router.navigate([HOME_ROUTE]);
         }
       }
     }

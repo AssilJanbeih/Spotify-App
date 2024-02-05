@@ -2,8 +2,7 @@
     <div class="border-slate pb-12 shadow-xl shadow-current m-12 p-10 rounded-xl bg-neutral-700 border-2" *ngIf="artist"
         (click)="navigate(artist)">
         <div class="items-center m-1 sm:m-1">
-            <img *ngIf="artist.images[1].url" class="rounded-full w-[300px]" [src]="artist.images[2]?.url" [alt]="artist.name">
-            <!-- <div *ngIf="!artist.images[1].url"  class="rounded-full bg-black"></div> -->
+            <img class="rounded-full w-[300px]" [src]="artist.images[2]? artist.images[2].url : 'assets/images/no-image.png'" [alt]="artist.name">
         </div>
         <div class="mt-10 grid grid-cols-1 sm:grid-cols-4">
             <div class="sm:col-span-2">

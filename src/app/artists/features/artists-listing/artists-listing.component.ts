@@ -53,16 +53,6 @@ export class ArtistsListingComponent {
       this.handleArtistSearch();
     }
   }
-  // processResult() {
-  //   return (data: any) => {
-  //     if (data._embedded.products.length === 0) this.noResultFound = true;
-  //     this.artistsResult = data._embedded.products;
-  //     this.pageNumber = data.page.number + 1;
-  //     this.size = data.page.size;
-  //     this.totalElements = data.page.totalElements;
-  //   }
-  // }
-
 
   handleArtistSearch() {
     const keyword: string = this.route.snapshot.paramMap.get('keyword')!
@@ -81,33 +71,9 @@ export class ArtistsListingComponent {
       console.error(err.message);
     }, () => {
     });
-
-    // if (this.previousKeyword != keyword) {
-    //   this.pageNumber = 1;
-    // }
-
-    // this.previousKeyword = keyword;
-
-    // this.artistService.getSearchProductPaginate(this.pageNumber - 1, this.size, keyword).subscribe(this.processResult())
-
   }
 
   public artistsList: any[] = [];
   public moreArtists: boolean = false;
   public activeLanguage: string = 'en';
-
-
-  // search both artist and track
-  public search(term: string): void {
-    // update url with term
-    this.router.navigate(['search', term]);
-
-
-  }
-
-  // update variable to see more/less artists
-  public seeMoreArtists(): void {
-    this.moreArtists = !this.moreArtists;
-  }
-
 }

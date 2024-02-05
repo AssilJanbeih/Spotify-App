@@ -6,7 +6,8 @@
 <div class="bg-black-2 p-5" *ngIf="artist">
     <div class="mt-10 grid grid-cols-1 sm:grid-cols-5">
         <div class="sm:col-span-1 items-center sm:m-1">
-            <img *ngIf="artist.images[1].url" class="rounded-full" [src]="artist.images[1]?.url" [alt]="artist.name">
+            <img class="rounded-full" [src]="artist.images[1]? artist.images[1].url : 'assets/images/no-image.png'"
+            [alt]="artist.name">
             <!-- <div *ngIf="!artist.images[1].url"  class="rounded-full bg-black"></div> -->
             <!-- <div class="p-5 m-2">
                 <app-popularity-stars [popularity]="artist.popularity">
