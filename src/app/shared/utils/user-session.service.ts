@@ -52,7 +52,7 @@ export class UserSessionService {
 
 
   public logout() {
-    localStorage.removeItem('access_token');
+    localStorage.removeItem(this.accessToken);
     console.log('token removed');
     this.router.navigate(['auth']);
   }
